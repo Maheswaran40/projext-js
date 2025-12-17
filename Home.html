@@ -9,10 +9,34 @@
 </head>
 <body>
     <h2>Home page</h2>
+
+    <button class="btn btn-primary" data-bs-toggle="offcanvas" data-bs-target="#off1">Cart</button>
+
+    <!-- cart offcanvas -->
+     <div class="offcanvas offcanvas-top" style="height: 400px;" id="off1">
+        <div class="ofcanvas-header"><h2>Cartlist</h2><button class="btn btn-close" data-bs-dismiss="offcanvas"></button></div>
+        <div class="offcanvas-body">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Product</th>
+                        <th>Name</th>
+                        <th>price</th>
+                        <th>Quantity</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody id="cart-list">
+                  
+                </tbody>
+            </table>
+        </div>
+     </div>
   
     <div class="row" id="display-data">
         
     </div>
+    
 </body>
 <script src="./Assets/Script/Products.js"></script>
 </html>
