@@ -7,19 +7,19 @@ var products=[
     },
      {
         id:2,
-        name:"Mobile2",
+        name:"Mob",
         price:19999,
         Image:"./Assets/Images/mobile.png"
     },
      {
         id:3,
-        name:"Mobile3",
+        name:"Mobi",
         price:19999,
         Image:"./Assets/Images/mobile.png"
     },
      {
         id:4,
-        name:"Mobile4",
+        name:"Mobil",
         price:19999,
         Image:"./Assets/Images/mobile.png"
     }
@@ -50,40 +50,81 @@ function displayProducts(data){
 displayProducts(products)
 
 
-var carlist=[]
-
+// Add to cart function
+var cartlist=[]
+var totalamt=0
 function addcart(productId){
-    var cartdata=products.find((value)=>value.id==productId)
-    var existing=carlist.find((value)=>value.id==productId)
-    console.log("Function is working");
-    
+    console.log("Product added to cart:", productId);
+    var cartdata=products.find((item)=>item.id==productId)
+        console.log(cartdata);
+        var existing=cartlist.find((item)=>item.id==productId)
     if(existing){
-        existing.quantity++
+        cartdata.quantity++
     }
     else{
-        carlist.push(cartdata)
+        cartlist.push(cartdata)
         cartdata.quantity=1
-
     }
-
-    console.log(carlist);
-displayCartlist(carlist)
-    
+displaycartitems(cartlist)
+totalamt=totalamt+cartdata.price
+document.getElementById("total").innerText=`Total Amount : ${totalamt}`
 }
-// display cartlist
 
-function displayCartlist(data){
-    var cartdata=""
+function displaycartitems(data){
+    var  cartdata=""
     data.map((value)=>(
-        cartdata+=` 
-        <tr>
-                    <td><img src="${value.Image}" height="100px" width="100px"/></td>
+cartdata+=` <tr>
+                    <td><img src="${value.Image}" height="100px" width="100%" alt=""></td>
                     <td>${value.name}</td>
                     <td>${value.price}</td>
                     <td>${value.quantity}</td>
-                    <td><button class="btn btn-danger" onclick="removecart(${value.id})">Remove</button></td>
-        </tr>`
+                    <td><button class="btn btn-danger" onclick="removeItem(${value.id})">Remove</button></td>
+                  </tr>`
     ))
-    document.getElementById("cart-list").innerHTML=cartdata
+document.getElementById("cart-list").innerHTML=cartdata
+}
 
+// remove item from cart
+function removeItem(productId){
+    var remove_item=cartlist.find((value)=>value.id==productId)
+    console.log(remove_item);
+    
+    if(remove_item.quantity>1){
+        remove_item.quantity--
+        totalamt=totalamt-remove_item.price
+    }
+    else{
+        cartlist=cartlist.filter((value)=>value.id!=productId)
+        totalamt=0
+    }
+    document.getElementById("total").innerText=`Total Amount : ${totalamt}`
+
+displaycartitems(cartlist)
+
+}
+
+// search function
+function serarchFun(event){
+event.preventDefault()
+console.log(e,"event");
+
+var seacrh_input= document.getElementById("search-input").value
+console.log(seacrh_input);
+
+var output=products.filter((value)=>value.name.toLowerCase().includes(seacrh_input.toLowerCase()))
+console.log(output);
+
+var finaloutput=""
+output.map((item)=>(
+    finaloutput+=`
+    <div class="col-lg-3">
+                    <div class="card">
+                        <img src="${item.Image}" height="150px" width="100px"   alt="">
+                        <div class="card-body">
+                        ${item.name}
+                        </div>
+                    </div>
+                </div>`
+))
+document.getElementById("search-row").innerHTML=finaloutput
 }

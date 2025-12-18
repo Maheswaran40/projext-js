@@ -11,11 +11,13 @@
     <h2>Home page</h2>
 
     <button class="btn btn-primary" data-bs-toggle="offcanvas" data-bs-target="#off1">Cart</button>
+    <button class="btn btn-primary" data-bs-toggle="offcanvas" data-bs-target="#off2">search</button>
 
     <!-- cart offcanvas -->
      <div class="offcanvas offcanvas-top" style="height: 400px;" id="off1">
         <div class="ofcanvas-header"><h2>Cartlist</h2><button class="btn btn-close" data-bs-dismiss="offcanvas"></button></div>
         <div class="offcanvas-body">
+            <h2 id="total">total</h2>
             <table class="table">
                 <thead>
                     <tr>
@@ -27,12 +29,27 @@
                     </tr>
                 </thead>
                 <tbody id="cart-list">
-                  
+                 
                 </tbody>
             </table>
         </div>
      </div>
   
+     <!-- offcanvas search -->
+      <div class="offcanvas offcanvas-top" style="height: 400px;" id="off2">
+        <div class="offcanvas-header"><h2>Search</h2><button class="btn btn-close"></button></div>
+        <div class="ofcanvas-body container">
+            <form action="" class="input-group" onsubmit="serarchFun(event)">
+                <input type="search" class="form-control" id="search-input">
+                <input type="submit" value="search" class="btn btn-primary">
+            </form>
+            <br>
+            <div class="row" id="search-row">
+                
+            </div>
+        </div>
+      </div>
+
     <div class="row" id="display-data">
         
     </div>
